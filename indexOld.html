@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<?php header('Access-Control-Allow-Origin: *'); ?>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>WAYTOAPP TEMPLATE</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicon-152.png">
+  <link rel="icon" sizes="196x196" href="assets/img/favicon-196.png">
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="navbar-icon-container"> <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a> <a href="#" class="navbar-icon pull-right visible-xs" id="sidebar-toggle-btn"><i class="fa fa-list white"></i></a>
+        </div>
+        <a class="navbar-brand" href="#">WAYTOAPP Video App</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="hidden-xs"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Control Panel</a></li>
+          <!--<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>-->
+          <li class="hidden-xs"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="submit-btn"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;&nbsp;Submit Order</a></li>
+        </ul>
+      </div>
+      <!--/.navbar-collapse -->
+    </div>
+  </div>
+
+
+  <div id="container">
+
+
+      <div class="row">
+        <div  class="col-md-12">
+          <div id="sidebar"  class="position-absolute">
+            <div class="sidebar-wrapper">
+              <div class="panel panel-default" >
+                <div class="panel-heading">
+                  <h3 class="panel-title">Control
+                    <button type="button" class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn"><i class="fa fa-chevron-left"></i></button>
+                  </h3>
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                    <ul class="list-group" id="linelist">
+                    </ul>
+                  </div>
+                  <div class="row control"> Participant ID:
+                    <input id="participant-tb" type="text" name="start" value="test user">
+                  </div>
+                  <div class="row control"> Route:
+                    <select id="route-video-db">
+                      <option value="all">All routes</option>
+                      <option value="route6">route 6</option>
+                    </select>
+                  </div>
+                  <div class="row control">
+                    <input type="checkbox" id="record-cb" value="record" checked> Record
+                   </div>
+                   <div class="row control">
+                     <button type="button" id="load-btn" class="btn btn-default">Load route</button>
+                   </div>
+                   <hr>
+                   <div class="row control"> width: <input id="tb-width" type="text" size="3" value="500"><button type="button" id="width-btn"class="btn btn-default"> <span id="width-btn-txt" class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button></div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="video-container" class="text-center">
+            <div id="start-message" width="500" height="400">
+              <h4>Watch this video to learn about this experiment or load the routes to start! </h4>
+              <video width="700" id="video-opening-tag" controls>
+                <source src="assets/video/movie1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div id="main-route-figure" class="figure-container">
+              <h4>Route 6: Scroll down to answer question about this rotue.</h4>
+                <div id="figure-main"> <img id="fig0" src="data:," alt="tutorial" width="auto" height="auto" style=" max-width: 900px; max-height: 900px; "></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="question-container">
+          <div class="figure-container">
+          <!-- <h4>Q1a: Both maps show the same route (<span style="color:blue">blue</span> path) with the same turns at decision points (<span style="color:green">green</span> dots).</h4> -->
+              <h4>Imagine you're sitting in a car and you should follow a route highlighted a map.<br> We will offer you two different visualizations of the same route. Both maps show the correct route. <br> You start driving at the location indicated by a red dot.</h4>
+              <div id="figure-main"> <img id="fig1a" src="data:," alt="tutorial" width="auto" height="auto" style=" max-width: 900px; max-height: 900px; "></div>
+
+          <div id="evaluation-container" class="text-center">
+            <h5>Compare map A and map B by following the <span style="color:blue">route</span> with your eyes.<br> Start in the <span style="color:red">red</span> dot and pay atention to the turns at each <span style="color:green">decision point.</span></h5>
+            <div id="q1a-window" class="question-window" >
+                <div>
+                  <strong><p style="padding-top: 5px;text-align: center;"><span id="intruciton-text"  >Which map would you prefer?</span></p></strong>
+               </div>
+               <div class="slidecontainer" style="display: flex;">
+                  <p><span>Map A</span></p><input type="range" min="0" max="4" value="2" class="slider" id="q1a-slider"><p><span>Map B</span></p>
+              </div>
+              <div class="panel-bottom">
+                <span id="q1a-value" style="color:blue;font-weight:bold" >No preference.</span><button type="button" id="q1a-btn"class="btn btn-default" aria-label="Left Align"> <span class="glyphicon glyphicon-ok" aria-hidden="true">Ok</span></button>
+              </div>
+            </div>
+            <div id="q1a-answer-again-container" class="answer-again-container" >
+              <button type="button" id="q1a-answer-again-btn"class="btn btn-default"> <span class="glyphicon glyphicon-repeat" aria-hidden="true">Answer again!</span></button>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="question-container">
+          <div class="figure-container">
+            <h4>Q2a: Both maps highlighted an alternative (<span style="color:red">red</span>) path to the route (<span style="color:blue">blue</span>).</h4>
+              <div id="figure-main"> <img id="fig2a" src="data:," alt="tutorial" width="auto" height="auto" style=" max-width: 900px; max-height: 900px; "></div>
+
+          <div id="evaluation-container" class="text-center">
+            <div id="q2a-window" class="question-window" >
+                <div >
+                  <strong><p style="padding-top: 5px;text-align: center;"><span id="intruciton-text"  >Would you prefer one map over the other if you had to follow the <span style="color:red">red</span> path?</span></p></strong>
+               </div>
+               <div class="slidecontainer" style="display: flex;">
+                  <p><span>Map A</span></p><input type="range" min="0" max="4" value="2" class="slider" id="q2a-slider"><p><span>Map B</span></p>
+              </div>
+              <div class="panel-bottom">
+                <span id="q2a-value" style="color:blue;font-weight:bold" >No preference.</span>.<button type="button" id="q2a-btn"class="btn btn-default" aria-label="Left Align"> <span class="glyphicon glyphicon-ok" aria-hidden="true">Ok</span></button>
+              </div>
+            </div>
+            <div id="q2a-answer-again-container" class="answer-again-container" >
+              <button type="button" id="q2a-answer-again-btn"class="btn btn-default"> <span class="glyphicon glyphicon-repeat" aria-hidden="true">Answer again!</span></button>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="question-container">
+          <div class="figure-container">
+            <h4>Q3a: In the original map is highlighted (<span style="color:orange">orange</span>) street network.</h4>
+              <div id="figure-main"> <img id="fig3a1" src="data:," alt="tutorial" width="auto" height="auto" style=" max-width: 800px; max-height: 800px; "></div>
+
+              <div id="drawing-container">
+                  <h4>
+                    <br>Indentify and mark on map "A" and map "B" the same streets. <br> Use your mouse to draw over the figures. </h4>
+                <!--   <input type="color"  class="js-color-picker  color-picker">
+                  <input type="range" class="js-line-range" min="1" max="72" value="1">
+                  <label class="js-range-value">1</label>Px -->
+                  <button type="button" id="clear-btn3a" class="btn btn-default"> Clear All <span id="width-btn-txt" class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>
+                  <canvas id="q3a-draw-canvas" class="js-paint  paint-canvas" width="500" height="500"></canvas>
+
+              </div>
+
+              <div id="evaluation-container" class="text-center">
+                <div id="q3a-window" class="question-window" >
+                    <div >
+                      <strong><p style="padding-top: 5px;text-align: center;"><span id="intruciton-text"  >On which map was easier to identify the marked streets?</span></p></strong>
+                   </div>
+                   <div class="slidecontainer" style="display: flex;">
+                      <p><span>Map A</span></p><input type="range" min="0" max="4" value="2" class="slider" id="q3a-slider"><p><span>Map B</span></p>
+                  </div>
+                  <div class="panel-bottom">
+                    <span id="q3a-value" style="color:blue;font-weight:bold" >No preference.</span>.<button type="button" id="q3a-btn"class="btn btn-default" aria-label="Left Align"> <span class="glyphicon glyphicon-ok" aria-hidden="true">Ok</span></button>
+                  </div>
+                </div>
+                <div id="q3a-answer-again-container" class="answer-again-container" >
+                  <button type="button" id="q3a-answer-again-btn"class="btn btn-default"> <span class="glyphicon glyphicon-repeat" aria-hidden="true">Answer again!</span></button>
+                </div>
+              </div>
+
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <hr>
+      <div class="row">
+        <div  class="col-md-12" >
+        <div class="question-container" >
+          <button type="button" id="next-route-btn"class="btn btn-default"> <span class="glyphicon glyphicon-repeat" aria-hidden="true">Next Route</span></button>
+        </div>
+      </div>
+
+     </div>
+     <hr>
+     <div class="row">
+       <div  class="col-md-12" >
+
+
+       </div>
+
+
+    </div>
+
+    <div id="instruction-info" class="hidden" >
+
+        <div class="row">
+          <div class="col-md-4">
+          <button type="button" id="instruction-info-close"class="btn btn-default" aria-label="Left Align"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+          </div>
+        <div class="col-md-8">
+          <p><strong><span id="instruction-title">Here are the instructions</span></strong></p>
+        </div>
+       </div>
+        <div id="instruction-content" >
+          <p>Hi,</p><br>
+          <p>Imagine you need to drive from your place to your colleague’s office to deliver a package.</p><br>
+          <p>Before you start driving, you first need to learn the route using the map.  </p><br>
+          <p>For that, PUT THE ROUTE STEPS IN THE RIGHT ORDER. </p><br>
+          <p>Tip: the first step is highlighted in green.</p>
+
+        <!--  <img src="riotutorial.gif" alt="tutorial" width="100%" height="auto" style=" max-width: 600px"> -->
+        </div>
+    </div>
+
+
+
+
+  </div>
+  </body>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+  <script src="assets/js/FileSaver.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+  <script src="assets/js/app.js"></script>
+
+ <!--
+  <script src="assets/js/configuration.js"></script>
+  <script src="assets/js/js.cookie-2.2.1.min.js"></script>
+
+  <script src="assets/js/app_exposure.js"></script>
+-->
+
+
+
+
+  <!--<script src="assets/js/mqttclient.js"></script>-->
+
+  <!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbL7Lg8dSEE3UTM9BrJl9CGhq-IEsIBrU&signed_in=true&callback=initMap" async defer></script>
+</body>
+
+</html>

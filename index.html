@@ -1,1 +1,435 @@
+<!DOCTYPE html>
+<?php header('Access-Control-Allow-Origin: *'); ?>
+<html lang="en">
 
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>WAYTOAPP</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="navbar-icon-container"> <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a> <a href="#" class="navbar-icon pull-right visible-xs" id="sidebar-toggle-btn"><i class="fa fa-list white"></i></a>
+        </div>
+        <a class="navbar-brand" href="#">WAYTO - Schematic Network Study </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="hidden-xs"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Control Panel</a></li>
+          <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Full Extent</a></li>
+          <li class="hidden-xs"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="submit-btn"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;&nbsp;Submit</a></li>
+        </ul>
+      </div>
+      <!--/.navbar-collapse -->
+    </div>
+  </div>
+
+
+  <div id="container">
+
+
+      <div class="row">
+        <div  class="col-md-12">
+          <div id="sidebar"  class="position-absolute">
+            <div class="sidebar-wrapper">
+              <div class="panel panel-default" >
+                <div class="panel-heading">
+                  <h3 class="panel-title">Control
+                    <button type="button" class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn"><i class="fa fa-chevron-left"></i></button>
+                  </h3>
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                    <ul class="list-group" id="linelist">
+                    </ul>
+                  </div>
+                  <div class="row control"> Participant ID:
+                    <input id="participant-tb" type="text" name="start" value="test user">
+                  </div>
+                  <div class="row control"> Route:
+                    <select id="route-video-db">
+                      <option value="all">All routes</option>
+                      <option value="route0">route 0</option>
+                      <option value="route1">route 1</option>
+                      <option value="route2">route 2</option>
+                      <option value="route3">route 3</option>
+                      <option value="route4">route 4</option>
+                      <option value="route5">route 5</option>
+                      <option value="route6">route 6</option>
+                    </select>
+                  </div>
+                   <div class="row control">
+                     <button type="button" id="load-btn" class="btn btn-default">Load</button>
+                   </div>
+                   <hr>
+                   <div class="row control"> width: <input id="tb-width" type="text" size="3" value="500"><button type="button" id="width-btn"class="btn btn-default"> <span id="width-btn-txt" class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button></div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="final-message-container" class="text-center">
+
+              <h4>Thank you for your participation!</h4>
+              <h4>During the experiment, you download <b>12 figures and one data file (csv)</b> with your answers.</h4>
+              <h4>Please, email these answers to <b>galvao.marcelo@uni-muenster.de</b> .
+                <br>You can send them in a zip folder if you prefrer.</h4>
+              <h4>
+
+          </div>
+          <div id="video-container" class="text-center">
+            <div id="start-message" width="500" height="400">
+              <h4>Watch the video until the end to learn about the experiment! </h4>
+              <video width="700" id="video-opening-tag" controls>
+                <source src="assets/video/videointro2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="demo-question-container" id="demographic" >
+          <div class="figure-container">
+          <!-- <h4>Q1a: Both maps show the same route (<span style="color:blue">blue</span> path) with the same turns at decision points (<span style="color:green">green</span> dots).</h4> -->
+              <h4>The following questions are optional. We would like to know a little bit about you.</h4>
+
+
+          <div id="evaluation-container" class="text-center">
+            <div id="demo-window" class="question-window" >
+                <div>
+                  <strong><p style="padding-top: 5px;text-align: center;"><span id="intruciton-text">What is your gender?</span></p></strong>
+               </div>
+               <div class="radio-container">
+
+
+
+                 <form>
+                 <input type="radio" id="demo-gender-female" name="gender" value="female">
+                 <label for="demo-gender-female">Female</label>&nbsp &nbsp
+                  <input type="radio" id="demo-gender-male" name="gender" value="male">
+                  <label for="demo-gender-male">Male</label>&nbsp &nbsp
+                  <input type="radio" id="demo-gender-other" name="gender" value="other">
+                  <label for="demo-gender-other">Other</label>&nbsp &nbsp
+                  <input type="radio" id="demo-gender-undefied" name="gender" value="undefined" checked>
+                  <label for="demo-gender-undefied">I prefer not to answer</label>
+                </form>
+               </div>
+            </div>
+          </div>
+
+          <div id="evaluation-container" class="text-center">
+            <div id="demo-window" class="question-window" >
+                 <label for="fname">How old are you?</label><br>
+                 <input type="number" id="age" name="age" min="16" max="99" value="0"><br>
+            </div>
+          </div>
+
+
+          <div id="evaluation-container" class="text-center">
+            <div id="demo-window" class="question-window" >
+                <div>
+                  <strong><p style="padding-top: 5px;text-align: center;"><span id="intruciton-text">Do you have a driving licence?</span></p></strong>
+               </div>
+               <div class="radio-container">
+                  <input type="radio" id="demo-licence-yes" name="licence" value="no">
+                  <label for="no">No</label>&nbsp &nbsp
+                  <input type="radio" id="demo-licence-no" name="licence" value="yes">
+                  <label for="yes">Yes</label>&nbsp &nbsp
+                  <input type="radio" id="demo-licence-undefied" name="licence" value="undefined" checked="checked">
+                  <label for="undefied">I prefer not to answer</label>&nbsp &nbsp
+
+               </div>
+            </div>
+          </div>
+
+          <div id="evaluation-container" class="text-center">
+            <div id="demo-window" class="question-window" >
+                <div>
+                  <strong><p style="padding-top: 5px;text-align: center;"><span id="intruciton-text">How would you rate your expertise with cartography?</span></p></strong>
+               </div>
+               <div class="radio-container">
+                 <input type="radio" id="demo-expertise-1" name="expertise" value="1" checked="checked">
+                 <label for="1">1</label>&nbsp &nbsp
+                  <input type="radio" id="demo-expertise-2" name="expertise" value="2">
+                  <label for="2">2</label>&nbsp &nbsp
+                  <input type="radio" id="demo-expertise-3" name="expertise" value="3">
+                  <label for="3">3</label>&nbsp &nbsp
+               </div>
+               <div>
+                 <p style="padding-top: 5px;text-align: center;">1 - novice; 3 - professional</p></strong>
+              </div>
+            </div>
+          </div>
+          <div class="demo-question-container" >
+          <button type="button" id="confirm-demo-btn"class="btn btn-default"> Ok! </button>
+        </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="question-container" id="q1" >
+          <div class="figure-container">
+          <!-- <h4>Q1a: Both maps show the same route (<span style="color:blue">blue</span> path) with the same turns at decision points (<span style="color:green">green</span> dots).</h4> -->
+              <h4>Question 1: Imagine you're sitting in a car and you should follow a route highlighted in a map.
+                <br> We will offer you two different visualizations of the <b>same</b> route. Both maps show the correct route.
+                 </h4>
+              <div id="figure-main"> <img id="fig1a" src="data:," alt="tutorial" width="auto" height="auto" style=" max-width: 1000px; max-height: 700px; "></div>
+
+          <div id="evaluation-container" class="text-center">
+            <div id="q1a-window" class="question-window" >
+                <div>
+                  <strong><p style="padding-top: 5px;text-align: center;"><span id="intruciton-text"  > You start driving at the location indicated by a <span style="color:red">red</span> dot. <br>Which map would you prefer if you had to follow the <span style="color:blue">route?</span></span></p></strong>
+               </div>
+               <div class="radio-container">
+                  <input type="radio" id="q1a-A" name="q1a" value="A">
+                  <label for="male">Map A </label>&nbsp &nbsp
+                  <input type="radio" id="q1a-neutral" name="q1a" value="neutral">
+                  <label for="female">No preference </label>&nbsp &nbsp
+                  <input type="radio" id="q1a-B" name="q1a" value="B">
+                  <label for="other">Map B</label>
+               </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="question-container" id="q2a" >
+          <div class="figure-container">
+            <h4>Question 2a: Both maps highlighted in <span style="color:red">red</span> the <b>same</b> alternative path to the route.</h4>
+              <div id="figure-main"> <img id="fig2a" src="data:," alt="tutorial" width="auto" height="auto" style=" max-width: 1000px; max-height: 700px; "></div>
+
+          <div id="evaluation-container" class="text-center">
+            <div id="q2a-window" class="question-window" >
+                <div >
+                  <strong><p style="padding-top: 5px;text-align: center;"><span id="intruciton-text"  >Would you prefer one map over the other if you had to follow <u>only</u> the <span style="color:red">red</span> path?</span></p></strong>
+               </div>
+               <div class="radio-container">
+                  <input type="radio" id="q2a-A" name="q2a" value="A">
+                  <label for="A">Map A </label>&nbsp &nbsp
+                  <input type="radio" id="q2a-neutral" name="q2a" value="neutral">
+                  <label for="neutral">No preference </label>&nbsp &nbsp
+                  <input type="radio" id="q2a-B" name="q2a" value="B">
+                  <label for="B">Map B</label>
+               </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="question-container" id="q2b" >
+          <div class="figure-container">
+            <h4>Question 2b: Both maps highlighted in <span style="color:red">red</span> the <b>same</b> alternative path to the route.</h4>
+              <div id="figure-main"> <img id="fig2b" src="data:," alt="tutorial" width="auto" height="auto" style=" max-width: 1000px; max-height: 700px; "></div>
+
+          <div id="evaluation-container" class="text-center">
+            <div id="q2b-window" class="question-window" >
+                <div >
+                  <strong><p style="padding-top: 5px;text-align: center;"><span id="intruciton-text"  >Would you prefer one map over the other if you had to follow <u>only</u> the <span style="color:red">red</span> path?</span></p></strong>
+               </div>
+               <div class="radio-container">
+                  <input type="radio" id="q2b-A" name="q2b" value="A">
+                  <label for="A">Map A </label>&nbsp &nbsp
+                  <input type="radio" id="q2b-neutral" name="q2b" value="neutral">
+                  <label for="neutral">No preference </label>&nbsp &nbsp
+                  <input type="radio" id="q2b-B" name="q2b" value="B">
+                  <label for="B">Map B</label>
+               </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <hr>
+
+
+
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="question-container" id="q3a" >
+          <div class="figure-container">
+            <h4>Question 3a: In the original map some streets are highlighted in <span style="color:orange">orange</span>.</h4>
+              <div id="figure-main"> <img id="fig3a1" src="data:," alt="tutorial" width="auto" height="auto" ></div>
+
+              <div id="drawing-container">
+                  <h4>                    Identify and mark the <b>same</b> streets on map "A" <b>and</b> map "B". <br> Use your mouse to draw over the figure below. </h4>
+                  <canvas id="q3a-draw-canvas" class="js-paint  paint-canvas" width="500" height="500"></canvas>
+
+              </div>
+              <div class="save-img-container" >
+                <button type="button" id="clear-btn3a" class="btn btn-default"> <span id="width-btn-txt" class="glyphicon glyphicon-erase" aria-hidden="true"></span> Clear All </button>
+                <button type="button" id="q3a-save-img-btn"class="btn btn-default"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Save figure after your drawing </button>
+              </div>
+
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="question-container" id="q3b" >
+          <div class="figure-container">
+            <h4>Question 3b: In the original map some streets are highlighted in <span style="color:orange">orange</span>.</h4>
+              <div id="figure-main"> <img id="fig3b1" src="data:," alt="tutorial" width="auto" height="auto" ></div>
+
+              <div id="drawing-container">
+                  <h4>                    Identify and mark the <b>same</b> streets on map "A" <b>and</b> map "B". <br> Use your mouse to draw over the figure below. </h4>
+                  <canvas id="q3b-draw-canvas" class="js-paint  paint-canvas" width="500" height="500"></canvas>
+
+              </div>
+              <div class="save-img-container" >
+                <button type="button" id="clear-btn3b" class="btn btn-default"> <span id="width-btn-txt" class="glyphicon glyphicon-erase" aria-hidden="true"></span> Clear All </button>
+                <button type="button" id="q3b-save-img-btn"class="btn btn-default"> <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Save figure after your drawing </button>
+              </div>
+
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <hr>
+
+
+      <div class="row">
+        <div  class="col-md-12" >
+        <div class="question-container" >
+          <button type="button" id="next-route-btn"class="btn btn-default"> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Next Route </button>
+        </div>
+      </div>
+
+     </div>
+     <hr>
+     <div class="row">
+       <div  class="col-md-12" >
+
+
+       </div>
+
+
+    </div>
+
+    <div id="instruction-info" class="hidden" >
+
+        <div class="row">
+          <div class="col-md-4">
+          </div>
+        <div class="col-md-8">
+          <p><strong><span id="instruction-title">Read and confirm the Informed Consent Form to start</span></strong></p>
+        </div>
+       </div>
+        <div id="instruction-content" >
+
+          <h2>Informed Consent Form</h2>
+          <h3>Study title: Schematic network evaluation</h3>
+          <p>Dear Participant,
+          thank you for your participation in the study.</p>
+          <h4>Researcher(s):</h4>
+          Marcelo Galvão <b>galvao.marcelo@uni-muenster.de</b> (PhD candidate of Geoinformatics)</p>
+          <h4>Purpose of the study:</h4>
+          <p>We investigate how people use maps and orient themselves while driving.
+            Part of the problem is to understand how different kinds of maps benefit the user.
+            In this study, we evaluate different map simplification methods in the context of route reading and orientation.</p>
+          <h4>Procedure:</h4>
+          <p>In this study, you will evaluate six maps. For each map, there is two simplified versions, and you need to compare them and give your answer to five simple questions.
+            For some questions, you just need to answer if you prefer one map over the other objectively.
+            For others, you need to recognize a marked feature in a map and mark the same feature in another map by drawing with the mouse.
+            It is required a computer or a laptop connected to the internet i.e., no tablet or smartphones.
+            Please send your responses (including the figures) to the responsible researcher e-mail at the end of the experiment.</p>
+          <h4>Duration:</h4>
+          <p>10-15 minutes</p>
+          <h4>Potential risks:</h4>
+          <p>The study offers no risk for the participant.</p>
+          <h4>Privacy:</h4>
+          <p>Original data obtained from this study will be anonymised and only processed in aggregate.
+          In such form, it might be published in academic journals, presentations or other media, but
+          never in a way that would allow individual identification. One week after the completion of
+          the study it might no longer be possible to retract your data from such aggregated analyses.
+          <h4>Benefits:</h4>
+          <p>While you may not benefit from this research personally, the data collected in this user study will benefit the research community in better understanding how people use maps to orient themselves.</p>
+
+          <p>You are free to stop, quit the study and retract your data at any time during the study
+          with no further consequences.</p>
+          <p>If you have any questions, please ask them now.</p>
+          </p>For further questions, complains or issues, please contact the institute's Ethics-Committee:
+          <b>ifgi.ethics-app@uni-muenster.de</b>.</p>
+
+          <form action="/action_page.php">
+            <input type="checkbox" id="consent1" name="consent1" value="volunteered" onclick="confirmConsentForm()">
+            <label for="consent1"> I confirm I volunteered to participate in this study.</label><br>
+            <input type="checkbox" id="consent2" name="consent2" value="ask" onclick="confirmConsentForm()">
+            <label for="consent2"> I confirm I was allowed to ask questions and that I was provided with responses.</label><br>
+            <input type="checkbox" id="consent3" name="consent3" value="document" onclick="confirmConsentForm()">
+            <label for="consent3"> I confirm I was presented with this document prior to the beginning of the study.</label><br>
+            <input type="checkbox" id="consent4" name="consent4" value="quit" onclick="confirmConsentForm()">
+            <label for="consent4">I confirm and I understood my right to quit the study at any time.</label><br><br>
+            <button type="button" id="instruction-info-close"class="btn btn-default" aria-label="Left Align" disabled> Start experiment</button>
+          </form>
+
+
+        <!--  <img src="riotutorial.gif" alt="tutorial" width="100%" height="auto" style=" max-width: 600px"> -->
+        </div>
+    </div>
+
+
+
+
+  </div>
+  </body>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+  <script src="assets/js/FileSaver.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+  <script src="assets/js/app.js"></script>
+
+ <!--
+  <script src="assets/js/configuration.js"></script>
+  <script src="assets/js/js.cookie-2.2.1.min.js"></script>
+
+  <script src="assets/js/app_exposure.js"></script>
+-->
+
+
+
+
+  <!--<script src="assets/js/mqttclient.js"></script>-->
+
+  <!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbL7Lg8dSEE3UTM9BrJl9CGhq-IEsIBrU&signed_in=true&callback=initMap" async defer></script>
+</body>
+
+</html>
